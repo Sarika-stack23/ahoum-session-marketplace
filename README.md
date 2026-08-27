@@ -14,6 +14,7 @@ A compact sessions marketplace where users authenticate, browse sessions, and bo
 - **Request correlation IDs**: Every request gets a traceable `req_xxx` ID
 - **Booking event audit trail**: Records confirmed/rejected booking outcomes
 - **Concurrency verification**: Real multi-threaded test suite proves capacity safety
+- **Booking Integrity Console**: Creator dashboard visualizes live concurrency invariants and event timelines
 
 ## Architecture
 

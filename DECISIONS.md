@@ -207,3 +207,10 @@ No real-time seat updates (would need WebSocket + Redis pub/sub). Acceptable per
 | **Started session** | N/A (not a simple constraint) | Business rule in transaction | Disabled button (UX only) |
 | **Ownership** | N/A | Queryset filtering (authoritative) | Hidden UI elements (UX only) |
 | **Authentication** | N/A | JWT verification (authoritative) | Token presence (UX only) |
+
+### Differentiator: Booking Integrity & Replay Console
+**Problem:** Concurrency invariants (capacity limits, duplicate prevention) are historically difficult to prove to reviewers without requiring them to write custom scripts. Furthermore, idempotency responses (returning cached success for a replay) can appear opaque in a typical UI.
+**Solution:** A bespoke **Booking Integrity & Replay Console** has been integrated into the Creator Dashboard. It fetches read-only event logs (`BookingEvent`) and live invariant calculations (`confirmed_bookings <= capacity`) from a dedicated backend endpoint (`GET /api/sessions/<id>/integrity/`).
+**Trade-offs:** 
+- *Pro*: Explicitly visualizes the `SELECT FOR UPDATE` locking mechanism without exposing sensitive PII. 
+- *Con*: Requires exposing a new creator-only read-only endpoint, but it is heavily locked down (ownership checks) and ensures the 24-hour scope is respected (no new models, Redis, or architectural bloat).

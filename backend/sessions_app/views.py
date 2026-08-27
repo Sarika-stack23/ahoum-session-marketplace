@@ -84,3 +84,63 @@ class CreatorSessionListView(generics.ListAPIView):
 
     def get_queryset(self):
         return Session.objects.filter(creator=self.request.user).select_related("creator")
+
+
+class SessionIntegrityView(generics.RetrieveAPIView):
+    """
+    Booking Integrity Console endpoint.
+    Only the Creator who owns the session can view this.
+    Returns read-only engineering data about capacity and concurrency.
+    """
+
+    permission_classes = [permissions.IsAuthenticated, IsCreator]
+
+    def get_queryset(self):
+        return Session.objects.filter(creator=self.request.user)
+
+    def retrieve(self, request, *args, **kwargs):
+        session = self.get_object()
+        
+        # Calculate invariant from real DB state
+        # We must import Booking here to avoid circular imports if it's not imported at top
+        from bookings.models import Booking, BookingEvent
+        
+        confirmed_bookings = Booking.objects.filter(
+            session=session,
+            status=Booking.Status.CONFIRMED
+        ).count()
+        
+        invariant_pass = confirmed_bookings <= session.capacity
+        
+        # Get recent events
+        events = BookingEvent.objects.filter(
+            session=session
+        ).select_related("user").order_by("-created_at")[:50]
+        
+        events_data = []
+        for e in events:
+            # We don't expose sensitive info, just request IDs and anonymized/username for tracing
+            events_data.append({
+                "timestamp": e.created_at,
+                "event_type": e.event_type,
+                "request_id": e.request_id,
+                "booking_id": e.booking_id,
+                # Safe debugging identifier
+                "username": f"User {e.user.id}",
+            })
+            
+        return Response({
+            "session_id": session.id,
+            "title": session.title,
+            "capacity": session.capacity,
+            "confirmed_bookings": confirmed_bookings,
+            "remaining_seats": max(0, session.capacity - confirmed_bookings),
+            "start_time": session.start_time,
+            "invariant": {
+                "name": "confirmed_bookings <= capacity",
+                "status": "PASS" if invariant_pass else "FAIL",
+                "confirmed_bookings": confirmed_bookings,
+                "capacity": session.capacity,
+            },
+            "recent_booking_events": events_data
+        })

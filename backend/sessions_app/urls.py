@@ -10,4 +10,5 @@ urlpatterns = [
     path("<int:pk>/update/", views.SessionUpdateView.as_view(), name="session-update"),
     path("<int:pk>/delete/", views.SessionDeleteView.as_view(), name="session-delete"),
     path("mine/", views.CreatorSessionListView.as_view(), name="creator-sessions"),
+    path("<int:pk>/integrity/", views.SessionIntegrityView.as_view(), name="session-integrity"),
 ]

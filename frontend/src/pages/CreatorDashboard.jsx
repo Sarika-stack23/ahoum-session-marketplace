@@ -8,12 +8,14 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { apiRequest } from '../api';
+import BookingIntegrityConsole from '../components/BookingIntegrityConsole';
 
 export default function CreatorDashboard() {
   const { isAuthenticated, isCreator } = useAuth();
   const navigate = useNavigate();
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [inspectSessionId, setInspectSessionId] = useState(null);
 
   useEffect(() => {
     if (!isAuthenticated || !isCreator) {
@@ -76,6 +78,9 @@ export default function CreatorDashboard() {
                 </div>
               </div>
               <div className="session-card-actions">
+                <button onClick={() => setInspectSessionId(session.id)} className="btn btn-primary btn-sm">
+                  Inspect Integrity
+                </button>
                 <Link to={`/sessions/${session.id}/edit`} className="btn btn-secondary btn-sm">
                   Edit
                 </Link>
@@ -86,6 +91,13 @@ export default function CreatorDashboard() {
             </div>
           ))}
         </div>
+      )}
+
+      {inspectSessionId && (
+        <BookingIntegrityConsole 
+          sessionId={inspectSessionId} 
+          onClose={() => setInspectSessionId(null)} 
+        />
       )}
 
       {/* Reliability Panel */}

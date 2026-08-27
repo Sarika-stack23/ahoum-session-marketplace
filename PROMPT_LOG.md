@@ -159,3 +159,19 @@ AI tools were used throughout this project. This document records material AI in
 **My correction:** Moved the idempotency check before the transaction block. Only new (non-replayed) requests enter the transaction and acquire the lock.
 
 **How I verified:** Reviewed the code flow. Confirmed that idempotency replays return without executing the transaction block. This is a performance consideration, not a correctness one — but it demonstrates understanding of lock contention.
+
+---
+
+## Prompt 7: Final Differentiation (Booking Integrity Console)
+
+**Date:** 2026-08-27
+**Goal:** Add a highly distinctive, engineering-focused differentiator that makes this submission stand out without expanding the assignment scope or altering the core architecture.
+**Prompt:** "Add ONE highly distinctive, engineering-focused differentiator... Provide an engineering-focused Booking Integrity Console."
+
+**AI approach:** Added an endpoint to expose concurrency details and a React UI to show the timeline.
+
+**What I rejected/changed:**
+- AI initially suggested adding artificial events to the `BookingEvent` table for idempotency replays just to populate the timeline. I rejected this because it duplicates database information and alters the core transaction logic unnecessarily. I strictly enforced that the invariant calculation (`confirmed_bookings <= capacity`) must use real database state, not a hard-coded PASS indicator.
+- Enforced that Creator ownership must be managed entirely server-side using `Session.objects.filter(creator=request.user)`.
+
+**Verification:** Ran full suite (`verify.sh` and `concurrency_test.py`) to prove the core lock was undisturbed. Manually verified the React component accurately renders the timeline without exposing PII.
