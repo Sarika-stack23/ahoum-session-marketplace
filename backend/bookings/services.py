@@ -89,7 +89,8 @@ def create_booking(user, session_id, request_id="", idempotency_key=None):
         try:
             existing = IdempotencyRecord.objects.get(key=idempotency_key, user=user)
             # Same key found — check if it's for the same session
-            if existing.session_id != session_id:
+            existing_session_id = existing.session_id or existing.response_body.get("original_session_id")
+            if existing_session_id and existing_session_id != session_id:
                 return BookingError(
                     code="IDEMPOTENCY_CONFLICT",
                     message="This idempotency key was already used for a different session.",
@@ -264,6 +265,7 @@ def _record_idempotency(key, user, session_id, booking, status_code, error_code,
     if not key:
         return
     try:
+        original_session_id = session_id
         # If the session doesn't exist, we can't use its ID for the foreign key.
         if error_code == "SESSION_NOT_FOUND":
             session_id = None
@@ -276,6 +278,7 @@ def _record_idempotency(key, user, session_id, booking, status_code, error_code,
                 "session_id": session_id,
                 "response_status": status_code,
                 "response_body": {
+                    "original_session_id": original_session_id,
                     "error": {
                         "code": error_code,
                         "message": "",
