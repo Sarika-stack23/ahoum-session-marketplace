@@ -1,0 +1,14 @@
+# Django core
+Django>=4.2,<5.0
+djangorestframework>=3.14,<4.0
+djangorestframework-simplejwt>=5.3,<6.0
+django-cors-headers>=4.3,<5.0
+
+# PostgreSQL
+psycopg2-binary>=2.9,<3.0
+
+# HTTP requests (for GitHub OAuth)
+requests>=2.31,<3.0
+
+# Production server
+gunicorn>=21.2,<23.0
