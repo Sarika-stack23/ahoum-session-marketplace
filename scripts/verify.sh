@@ -57,6 +57,8 @@ check "Concurrency script" python /app/scripts/concurrency_test.py
 
 # 6. Health endpoint
 check "Health endpoint" python -c "
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 from django.test.utils import setup_test_environment
 import django; django.setup()
 from django.test import RequestFactory

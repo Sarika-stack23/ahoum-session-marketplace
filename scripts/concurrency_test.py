@@ -30,7 +30,7 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Add backend to path for Django ORM access
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "backend"))
+sys.path.insert(0, "/app")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 import django
@@ -113,7 +113,7 @@ class ConcurrencyVerifier:
             try:
                 barrier.wait(timeout=5)
                 result = create_booking(user=user_ref, session_id=session.id)
-                return type(result).__name__
+                from django.db import connection; connection.close(); return type(result).__name__
             except Exception as e:
                 return f"ERROR: {e}"
 

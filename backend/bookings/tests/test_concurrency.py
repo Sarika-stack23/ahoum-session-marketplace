@@ -76,8 +76,11 @@ class ConcurrencyTestCase(TransactionTestCase):
 
         def attempt(user):
             barrier.wait()  # Synchronize start
-            result = create_booking(user=user, session_id=session.id)
-            results.append(result)
+            try:
+                result = create_booking(user=user, session_id=session.id)
+                results.append(result)
+            finally:
+                from django.db import connection; connection.close()
 
         threads = [threading.Thread(target=attempt, args=(u,)) for u in users]
         for t in threads:
@@ -111,7 +114,10 @@ class ConcurrencyTestCase(TransactionTestCase):
 
         def attempt(user):
             barrier.wait()
-            create_booking(user=user, session_id=session.id)
+            try:
+                create_booking(user=user, session_id=session.id)
+            finally:
+                from django.db import connection; connection.close()
 
         threads = [threading.Thread(target=attempt, args=(u,)) for u in users]
         for t in threads:
@@ -143,7 +149,10 @@ class ConcurrencyTestCase(TransactionTestCase):
 
         def attempt(user):
             barrier.wait()
-            create_booking(user=user, session_id=session.id)
+            try:
+                create_booking(user=user, session_id=session.id)
+            finally:
+                from django.db import connection; connection.close()
 
         threads = [threading.Thread(target=attempt, args=(u,)) for u in users]
         for t in threads:
@@ -184,7 +193,10 @@ class ConcurrencyTestCase(TransactionTestCase):
 
         def attempt(user):
             barrier.wait()
-            create_booking(user=user, session_id=session.id)
+            try:
+                create_booking(user=user, session_id=session.id)
+            finally:
+                from django.db import connection; connection.close()
 
         threads = [threading.Thread(target=attempt, args=(u,)) for u in users]
         for t in threads:
@@ -216,7 +228,10 @@ class ConcurrencyTestCase(TransactionTestCase):
 
         def attempt(user):
             barrier.wait()
-            create_booking(user=user, session_id=session.id)
+            try:
+                create_booking(user=user, session_id=session.id)
+            finally:
+                from django.db import connection; connection.close()
 
         threads = [threading.Thread(target=attempt, args=(u,)) for u in users]
         for t in threads:
@@ -250,7 +265,10 @@ class ConcurrencyTestCase(TransactionTestCase):
 
         def attempt():
             barrier.wait()
-            create_booking(user=user, session_id=session.id)
+            try:
+                create_booking(user=user, session_id=session.id)
+            finally:
+                from django.db import connection; connection.close()
 
         threads = [threading.Thread(target=attempt) for _ in range(5)]
         for t in threads:
