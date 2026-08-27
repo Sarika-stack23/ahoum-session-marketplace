@@ -23,12 +23,10 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    command: >
-      sh -c "python manage.py migrate --noinput &&
-             python manage.py collectstatic --noinput &&
-             gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 4 --timeout 120"
+    command: bash /app/entrypoint.sh
     volumes:
       - ./backend:/app
+      - ./scripts:/app/scripts
       - static_volume:/app/staticfiles
     env_file:
       - .env
