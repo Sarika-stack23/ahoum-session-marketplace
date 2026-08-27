@@ -264,6 +264,10 @@ def _record_idempotency(key, user, session_id, booking, status_code, error_code,
     if not key:
         return
     try:
+        # If the session doesn't exist, we can't use its ID for the foreign key.
+        if error_code == "SESSION_NOT_FOUND":
+            session_id = None
+            
         IdempotencyRecord.objects.get_or_create(
             key=key,
             user=user,

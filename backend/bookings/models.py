@@ -157,6 +157,8 @@ class IdempotencyRecord(models.Model):
     session = models.ForeignKey(
         "sessions_app.Session",
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
     response_status = models.IntegerField()
     response_body = models.JSONField()
