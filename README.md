@@ -12,7 +12,9 @@
 
 ---
 
-**Features | Screenshots | Architecture | Data Model | Setup | Tests**
+**[Features](#-2-key-features) | [Screenshots](#-3-application-screenshots) | [Architecture](#️-4-system-architecture) | [Data Model](#️-8-database-model) | [Setup](#-11-local-setup) | [Tests](#-13-testing--verification)**
+
+---
 
 ## ⚡ 1. Project Overview
 A compact sessions marketplace where users authenticate, browse sessions, and book them, while creators create and manage sessions. Built as a full-stack developer assignment.
@@ -189,6 +191,14 @@ erDiagram
 ---
 
 ## 💻 9. Tech Stack
+
+```mermaid
+pie title Tech Stack Distribution (Complexity Weight)
+    "Backend (Django/Python)" : 40
+    "Frontend (React/Vite)" : 30
+    "Database (PostgreSQL)" : 15
+    "Infrastructure (Docker/Vercel)" : 15
+```
 
 | Layer | Technology | Purpose |
 |------|------------|---------|
