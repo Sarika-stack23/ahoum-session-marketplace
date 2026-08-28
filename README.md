@@ -7,7 +7,19 @@
   ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
   ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
   ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+  ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 </div>
+
+---
+
+## 📸 Screenshots
+> **Note:** Replace these placeholders with actual screenshots before submitting!
+> 
+> ![Homepage Catalog](https://via.placeholder.com/800x400.png?text=Homepage+Catalog+Screenshot)
+> *The modern, responsive session catalog.*
+> 
+> ![Booking Integrity Console](https://via.placeholder.com/800x400.png?text=Booking+Integrity+Console+Screenshot)
+> *The engineering differentiator: Visualizing live PostgreSQL row-level locks and transaction events.*
 
 ---
 
