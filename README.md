@@ -7,7 +7,6 @@
   ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
   ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
   ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
-  ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 </div>
 
 ---
@@ -211,7 +210,6 @@ erDiagram
 | **Database** | PostgreSQL 15 | Relational persistence and ACID-compliant transaction locking. |
 | **Authentication** | GitHub OAuth, SimpleJWT | Secure, passwordless identity verification. |
 | **Infrastructure** | Docker Compose | Reproducible local development environments. |
-| **Deployment** | Vercel | Serverless hosting configuration included (`vercel.json`). |
 
 ---
 
@@ -229,8 +227,7 @@ ahoum-session-marketplace/
 │   └── src/contexts/      # Auth & API state
 ├── docs/screenshots/      # README assets
 ├── scripts/               # Automated testing & verification scripts
-├── docker-compose.yml     # Local infrastructure definition
-└── vercel.json            # Vercel serverless deployment config
+└── docker-compose.yml     # Local infrastructure definition
 ```
 
 ---
