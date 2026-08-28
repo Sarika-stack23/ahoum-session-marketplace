@@ -374,6 +374,7 @@ Vercel does not host databases. You must use a persistent PostgreSQL database. S
 3. Add the following Environment Variables in Vercel:
    - `DATABASE_URL` = (Your Neon connection string)
    - `DJANGO_SECRET_KEY` = (A random secure string)
+   - `DJANGO_ALLOWED_HOSTS` = `.vercel.app`
    - `GITHUB_CLIENT_ID` = (Your GitHub OAuth App ID)
    - `GITHUB_CLIENT_SECRET` = (Your GitHub OAuth App Secret)
    - `VITE_GITHUB_CLIENT_ID` = (Same as GITHUB_CLIENT_ID)
