@@ -44,28 +44,21 @@ A compact sessions marketplace where users authenticate, browse sessions, and bo
 
 ## 📸 3. Application Screenshots
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <img src="docs/screenshots/home.png" alt="Marketplace" width="100%" />
-      <p align="center"><b>Landing & Marketplace</b><br/><i>The responsive session catalog available to all users.</i></p>
-    </td>
-    <td width="50%" valign="top">
-      <img src="docs/screenshots/login.png" alt="GitHub Login" width="100%" />
-      <p align="center"><b>GitHub OAuth Login</b><br/><i>Seamless third-party authentication flow.</i></p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <img src="docs/screenshots/session_detail.png" alt="Session Details" width="100%" />
-      <p align="center"><b>Session Details & Booking</b><br/><i>Detailed session view with capacity tracking and booking.</i></p>
-    </td>
-    <td width="50%" valign="top">
-      <img src="docs/screenshots/dashboard.png" alt="User Dashboard" width="100%" />
-      <p align="center"><b>User Dashboard</b><br/><i>Personalized view showing active bookings.</i></p>
-    </td>
-  </tr>
-</table>
+### Landing & Marketplace
+![Marketplace](./docs/screenshots/home.png)
+*The responsive session catalog available to all users.*
+
+### GitHub OAuth Login
+![GitHub Login](./docs/screenshots/login.png)
+*Seamless third-party authentication flow.*
+
+### Session Details & Booking
+![Session Details](./docs/screenshots/session_detail.png)
+*Detailed session view with capacity tracking and booking.*
+
+### User Dashboard
+![User Dashboard](./docs/screenshots/dashboard.png)
+*Personalized view showing active bookings.*
 
 ---
 
