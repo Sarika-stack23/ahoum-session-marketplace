@@ -7,7 +7,7 @@
  * - OAuth failure (error in query params)
  * - Network failure
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -16,12 +16,17 @@ export default function OAuthCallback() {
   const [error, setError] = useState(null);
   const { handleOAuthCallback } = useAuth();
   const navigate = useNavigate();
+  const hasRun = useRef(false);
 
   useEffect(() => {
+    if (hasRun.current) return;
+    
     const code = searchParams.get('code');
     const state = searchParams.get('state');
     const oauthError = searchParams.get('error');
     const errorDescription = searchParams.get('error_description');
+
+    hasRun.current = true;
 
     // Handle OAuth cancellation
     if (oauthError === 'access_denied') {
