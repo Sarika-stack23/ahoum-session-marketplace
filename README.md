@@ -10,18 +10,7 @@
   ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 </div>
 
----
 
-## 📸 Screenshots
-> **Note:** Replace these placeholders with actual screenshots before submitting!
-> 
-> ![Homepage Catalog](https://via.placeholder.com/800x400.png?text=Homepage+Catalog+Screenshot)
-> *The modern, responsive session catalog.*
-> 
-> ![Booking Integrity Console](https://via.placeholder.com/800x400.png?text=Booking+Integrity+Console+Screenshot)
-> *The engineering differentiator: Visualizing live PostgreSQL row-level locks and transaction events.*
-
----
 
 ## ⚡ Overview
 A compact sessions marketplace where users authenticate, browse sessions, and book them, while creators create and manage sessions. Built as a 24-hour full-stack developer assignment.
