@@ -358,4 +358,37 @@ Only listing guarantees that are genuinely implemented and testable:
 
 AI tools (Antigravity / Claude) were used throughout development. All AI output was reviewed, challenged, and verified. See PROMPT_LOG.md for detailed supervision evidence including specific corrections made to AI suggestions.
 
+## Vercel Serverless Deployment (100% Free)
 
+This project has been architected to deploy as a Vercel Monorepo. The React frontend is served statically, and the Django API is served via Vercel Serverless Functions.
+
+### 1. Database Setup (Neon PostgreSQL)
+Vercel does not host databases. You must use a persistent PostgreSQL database. SQLite is NOT supported because it lacks row-level locking capabilities necessary for the concurrency guarantees.
+1. Sign up for free at [Neon.tech](https://neon.tech)
+2. Create a Free PostgreSQL project and database.
+3. Obtain your `DATABASE_URL` (connection string). **Do NOT commit this to Git.**
+
+### 2. Vercel Deployment
+1. Go to [Vercel](https://vercel.com) and import your GitHub repository.
+2. The `vercel.json` file in the root directory will automatically configure the build and routing.
+3. Add the following Environment Variables in Vercel:
+   - `DATABASE_URL` = (Your Neon connection string)
+   - `DJANGO_SECRET_KEY` = (A random secure string)
+   - `GITHUB_CLIENT_ID` = (Your GitHub OAuth App ID)
+   - `GITHUB_CLIENT_SECRET` = (Your GitHub OAuth App Secret)
+   - `VITE_GITHUB_CLIENT_ID` = (Same as GITHUB_CLIENT_ID)
+4. Click **Deploy**. Vercel will automatically build the frontend and deploy the Django serverless functions.
+
+### 3. Database Migrations on Vercel
+Because Vercel functions are serverless, `python manage.py migrate` does not run automatically on startup. You must manually run migrations against your Neon database from your local machine:
+```bash
+export DATABASE_URL="your-neon-database-url"
+docker compose exec -e DATABASE_URL=$DATABASE_URL backend python manage.py migrate
+```
+
+### 4. Final OAuth Configuration
+Once Vercel provides your production URL (e.g. `https://your-project.vercel.app`), go to your GitHub OAuth App settings and update the **Authorization callback URL** to:
+`https://your-project.vercel.app/auth/callback`
+
+### Serverless Concurrency Guarantees
+Even though Vercel Serverless tears down the Django environment after every request, the `SELECT FOR UPDATE` concurrency guarantee is strictly preserved. This is because the row-level lock is acquired and held at the **Neon PostgreSQL database layer**, not the application layer. Vercel simply waits for the database to release the lock.
