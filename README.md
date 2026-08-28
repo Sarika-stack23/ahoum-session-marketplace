@@ -126,6 +126,18 @@ Without row locking, two concurrent transactions can both read `confirmed=0` for
 
 Two clients can simultaneously observe `remainingSeats=1`. Both click "Book." If the frontend were authoritative, both would succeed. The backend must be the single source of truth.
 
+## Booking Integrity Console
+
+The **Booking Integrity Console** is a specialized Creator dashboard designed to visualize the actual backend transaction pipeline for a session. It is the primary engineering differentiator of this project.
+
+Instead of hiding the complexity of concurrency, it exposes:
+- **Live Invariants:** Proves that `confirmed_bookings <= capacity`.
+- **Event Timeline:** Displays real `BookingEvent` records generated inside the `SELECT FOR UPDATE` transaction.
+- **Request Traceability:** Every booking attempt (success or failure) is logged with a unique `req_xxx` Request ID.
+- **Idempotency Honesty:** If an idempotent replay occurs, it is accurately represented without faking events.
+
+This console proves that the database locking is actively protecting the session from overbooking in real-time.
+
 ## Setup
 
 ### Prerequisites
