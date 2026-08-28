@@ -1,5 +1,29 @@
-# Sessions Marketplace
+<div align="center">
+  <h1>🚀 Ahoum Sessions Marketplace</h1>
+  <p>A high-concurrency, transaction-safe booking platform built for creators and users.</p>
+  
+  ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+  ![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
+  ![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
+  ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+  ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+  ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+</div>
 
+---
+
+## 📸 Screenshots
+> **Note:** Replace these placeholders with actual screenshots before submitting!
+> 
+> ![Homepage Catalog](https://via.placeholder.com/800x400.png?text=Homepage+Catalog+Screenshot)
+> *The modern, responsive session catalog.*
+> 
+> ![Booking Integrity Console](https://via.placeholder.com/800x400.png?text=Booking+Integrity+Console+Screenshot)
+> *The engineering differentiator: Visualizing live PostgreSQL row-level locks and transaction events.*
+
+---
+
+## ⚡ Overview
 A compact sessions marketplace where users authenticate, browse sessions, and book them, while creators create and manage sessions. Built as a 24-hour full-stack developer assignment.
 
 ## Features
