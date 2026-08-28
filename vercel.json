@@ -15,15 +15,20 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/(api|admin|static)/(.*)",
       "dest": "backend/config/wsgi.py"
     },
     {
-      "handle": "filesystem"
+      "src": "/assets/(.*)",
+      "dest": "frontend/assets/$1"
+    },
+    {
+      "src": "/vite.svg",
+      "dest": "frontend/vite.svg"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "frontend/index.html"
     }
   ]
 }
