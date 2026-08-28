@@ -47,3 +47,5 @@ frontend/dist/
 # Docker
 postgres_data/
 ahoum-session-marketplace-submission.zip
+*.docx
+*.zip
