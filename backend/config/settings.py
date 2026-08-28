@@ -120,7 +120,20 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1",
 ]
+# Allow production frontend origin(s) from environment
+_extra_origins = os.environ.get("CORS_ALLOWED_ORIGINS", "")
+if _extra_origins:
+    CORS_ALLOWED_ORIGINS += [o.strip() for o in _extra_origins.split(",") if o.strip()]
 CORS_ALLOW_CREDENTIALS = True
+
+# ── CSRF ──────────────────────────────────────────────────────
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost",
+    "http://localhost:3000",
+]
+_csrf_origins = os.environ.get("CSRF_TRUSTED_ORIGINS", "")
+if _csrf_origins:
+    CSRF_TRUSTED_ORIGINS += [o.strip() for o in _csrf_origins.split(",") if o.strip()]
 
 # ── GitHub OAuth ──────────────────────────────────────────────
 GITHUB_CLIENT_ID = os.environ.get("GITHUB_CLIENT_ID", "")

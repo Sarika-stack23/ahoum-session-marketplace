@@ -29,8 +29,9 @@ echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
 echo "Starting server..."
+PORT=${PORT:-8000}
 exec gunicorn config.wsgi:application \
-    --bind 0.0.0.0:8000 \
+    --bind 0.0.0.0:$PORT \
     --workers 4 \
     --timeout 120 \
     --access-logfile - \

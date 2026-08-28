@@ -8,7 +8,7 @@
  * Never exposes tokens in URLs or logs.
  */
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_URL || '/api';
 
 let accessToken = localStorage.getItem('access_token');
 let refreshToken = localStorage.getItem('refresh_token');

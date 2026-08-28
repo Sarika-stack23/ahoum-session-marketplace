@@ -153,8 +153,29 @@ cp .env.example .env
 # - Set a strong POSTGRES_PASSWORD
 # - Optionally set CREATOR_EMAILS for auto-promotion
 ```
+```
 
-### Docker Instructions
+## Production Deployment (Render)
+
+This project is configured for automated infrastructure-as-code deployment on [Render](https://render.com). The included `render.yaml` blueprint provisions the database, backend, and frontend automatically.
+
+### Deployment Steps
+1. Push this repository to GitHub (ensure `.env` is NOT tracked).
+2. Log in to Render dashboard and go to **Blueprints** -> **New Blueprint Instance**.
+3. Connect your GitHub repository.
+4. Render will automatically detect the `render.yaml` and prompt you for the required environment variables:
+   - `GITHUB_CLIENT_ID`
+   - `GITHUB_CLIENT_SECRET`
+   - `CREATOR_EMAILS` (Optional, comma-separated list of GitHub emails for admin promotion)
+5. Click **Apply**.
+6. Wait for the `sessions-marketplace-db`, `sessions-marketplace-api`, and `sessions-marketplace` (static site) services to deploy.
+7. **Important Post-Deployment Configuration:**
+   - In the Render dashboard, find the URL of your deployed Frontend static site.
+   - Go to your Backend Web Service -> Environment. Update `CORS_ALLOWED_ORIGINS` and `CSRF_TRUSTED_ORIGINS` to match your frontend URL (e.g. `https://your-frontend.onrender.com`).
+   - Go to your Frontend Static Site -> Environment. Update `VITE_API_URL` to match your backend URL + `/api` (e.g. `https://your-backend.onrender.com/api`).
+   - In your GitHub OAuth App settings, update the **Authorization callback URL** to match your frontend URL + `/auth/callback` (e.g. `https://your-frontend.onrender.com/auth/callback`).
+
+### Local Docker Instructions
 
 ```bash
 # Build and start all containers

@@ -19,7 +19,7 @@ export default function Profile() {
     setMessage(null);
     const result = await updateProfile({ bio });
     if (result.success) {
-      setMessage({ type: 'success', text: 'Profile updated.' });
+      setMessage({ type: 'success', text: 'Profile saved successfully.' });
     } else {
       setMessage({ type: 'error', text: result.error?.message || 'Update failed.' });
     }
@@ -27,21 +27,35 @@ export default function Profile() {
   };
 
   return (
-    <div className="container">
+    <div className="container slide-up">
       <h1>Profile</h1>
-      <div className="card">
+      <p className="text-muted mb-3">Manage your account information.</p>
+
+      <div className="card profile-card">
         <div className="profile-info">
-          {user.avatar_url && (
-            <img src={user.avatar_url} alt="Avatar" className="avatar" />
+          {user.avatar_url ? (
+            <img src={user.avatar_url} alt="" className="avatar" />
+          ) : (
+            <div className="avatar" style={{
+              background: 'var(--accent-subtle)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.5rem',
+              fontWeight: 700,
+              color: 'var(--accent)',
+            }}>
+              {(user.username || '?')[0].toUpperCase()}
+            </div>
           )}
           <div>
-            <h2>{user.username}</h2>
-            <p className="text-muted">{user.email}</p>
-            <span className="badge badge-available">{user.role}</span>
+            <div className="profile-name">{user.username}</div>
+            <div className="profile-email">{user.email}</div>
+            <span className="badge badge-accent" style={{ marginTop: '0.375rem' }}>{user.role}</span>
           </div>
         </div>
 
-        <div className="form-group" style={{marginTop: '1.5rem'}}>
+        <div className="form-group">
           <label htmlFor="bio">Bio</label>
           <textarea
             id="bio"
@@ -49,15 +63,28 @@ export default function Profile() {
             onChange={(e) => setBio(e.target.value)}
             rows={3}
             maxLength={500}
+            placeholder="Tell others a little about yourself..."
           />
+          <div className="text-xs text-tertiary mt-1" style={{ textAlign: 'right' }}>
+            {bio.length}/500
+          </div>
         </div>
 
         {message && (
-          <div className={`alert alert-${message.type}`}>{message.text}</div>
+          <div className={`alert alert-${message.type}`}>
+            {message.text}
+          </div>
         )}
 
         <button onClick={handleSave} className="btn btn-primary" disabled={saving}>
-          {saving ? 'Saving...' : 'Save Profile'}
+          {saving ? (
+            <>
+              <span className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }} />
+              Saving...
+            </>
+          ) : (
+            'Save Profile'
+          )}
         </button>
       </div>
     </div>

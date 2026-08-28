@@ -22,6 +22,7 @@ export default function CreateSession() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     setSubmitting(true);
     setError(null);
 
@@ -48,8 +49,10 @@ export default function CreateSession() {
   };
 
   return (
-    <div className="container">
+    <div className="container slide-up">
       <h1>Create Session</h1>
+      <p className="text-muted mb-3">Set up a new session for your audience.</p>
+
       <form onSubmit={handleSubmit} className="form">
         {error && <div className="alert alert-error">{error}</div>}
 
@@ -62,6 +65,7 @@ export default function CreateSession() {
             onChange={(e) => setForm({ ...form, title: e.target.value })}
             required
             maxLength={200}
+            placeholder="e.g. Advanced React Workshop"
           />
         </div>
 
@@ -72,6 +76,7 @@ export default function CreateSession() {
             value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
             rows={4}
+            placeholder="What will attendees learn or experience?"
           />
         </div>
 
@@ -98,9 +103,21 @@ export default function CreateSession() {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary" disabled={submitting}>
-          {submitting ? 'Creating...' : 'Create Session'}
-        </button>
+        <div className="form-actions">
+          <button type="submit" className="btn btn-primary" disabled={submitting}>
+            {submitting ? (
+              <>
+                <span className="spinner" style={{ width: 14, height: 14, borderWidth: 2 }} />
+                Creating...
+              </>
+            ) : (
+              'Create Session'
+            )}
+          </button>
+          <button type="button" onClick={() => navigate('/dashboard')} className="btn btn-secondary">
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
