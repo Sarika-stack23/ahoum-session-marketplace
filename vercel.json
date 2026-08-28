@@ -9,14 +9,14 @@
       }
     },
     {
-      "src": "backend/config/wsgi.py",
+      "src": "backend/vercel_wsgi.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(api|admin|static)/(.*)",
-      "dest": "backend/config/wsgi.py"
+      "dest": "backend/vercel_wsgi.py"
     },
     {
       "src": "/assets/(.*)",
