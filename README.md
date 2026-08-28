@@ -12,7 +12,7 @@
 
 ---
 
-**[Overview](#-1-project-overview) | [Features](#-2-key-features) | [Screenshots](#-3-application-screenshots) | [Architecture](#️-4-system-architecture) | [Flows](#-5-user-journey-flow) | [Auth](#-6-github-authentication-flow) | [Booking](#-7-booking--concurrency-flow) | [Data Model](#️-8-database-model) | [Tech Stack](#-9-tech-stack) | [Structure](#-10-project-structure) | [Setup](#-11-local-setup) | [Testing](#-13-testing--verification)**
+**[Overview](#-1-project-overview) | [Features](#-2-key-features) | [Screenshots](#-3-application-screenshots) | [Architecture](#️-4-system-architecture) | [Flows](#-5-user-journey-flow) | [Auth](#-6-github-authentication-flow) | [Booking](#-7-booking--concurrency-flow) | [Data Model](#️-8-database-model) | [Tech Stack](#-9-tech-stack) | [Structure](#-10-project-structure) | [Setup](#-11-local-setup) | [Testing](#-13-testing--verification) | [Docs](#-15-documentation)**
 
 ---
 
@@ -164,7 +164,7 @@ sequenceDiagram
     DB-->>API: Rejected for User B
 ```
 
-**Verification:** The repository includes a multi-threaded concurrency test (`scripts/concurrency_test.py`) that hammers the local database with simultaneous requests to mathematically prove this invariant holds.
+**Verification:** The repository includes a multi-threaded concurrency test (`scripts/concurrency_test.py`) that hammers the local database with simultaneous requests to verify this invariant holds under pressure.
 
 ---
 
@@ -237,11 +237,11 @@ ahoum-session-marketplace/
 
 ## 🚀 11. Local Setup
 
-This project uses Docker Compose to guarantee a flawless setup experience on any machine.
+This project uses Docker Compose to provide a reproducible local setup experience on any machine.
 
 **1. Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/ahoum-session-marketplace.git
+git clone https://github.com/Sarika-stack23/ahoum-session-marketplace.git
 cd ahoum-session-marketplace
 ```
 
@@ -299,9 +299,16 @@ docker compose exec backend python /app/scripts/concurrency_test.py
 - **Idempotency Protection:** Prevents duplicate bookings if a user double-clicks the "Book" button or experiences a network retry.
 - **RESTful Architecture:** Clean separation of concerns between the React SPA and the stateless Django API.
 
+## 📚 15. Documentation
+
+For a deeper dive into the engineering process, see the included documentation:
+- [Architecture & Design Decisions](DECISIONS.md) - Rationale for Django over FastAPI, Nginx routing, and role models.
+- [Development / Prompt Log](PROMPT_LOG.md) - Detailed log of AI assistance and developer oversight.
+- [Debugging Guide](DEBUGGING.md) - Troubleshooting common local setup and database issues.
+
 ---
 
-## 🔮 15. Future Improvements
+## 🔮 16. Future Improvements
 
 While this assignment covers the core requirements, a production release would benefit from:
 - **Real-Time Websockets:** Pushing live capacity updates to the frontend so users see seats disappearing instantly.
