@@ -12,7 +12,7 @@
 
 ---
 
-**[Features](#-2-key-features) | [Screenshots](#-3-application-screenshots) | [Architecture](#️-4-system-architecture) | [Data Model](#️-8-database-model) | [Setup](#-11-local-setup) | [Tests](#-13-testing--verification)**
+**[Overview](#-1-project-overview) | [Features](#-2-key-features) | [Screenshots](#-3-application-screenshots) | [Architecture](#️-4-system-architecture) | [Flows](#-5-user-journey-flow) | [Auth](#-6-github-authentication-flow) | [Booking](#-7-booking--concurrency-flow) | [Data Model](#️-8-database-model) | [Tech Stack](#-9-tech-stack) | [Structure](#-10-project-structure) | [Setup](#-11-local-setup) | [Testing](#-13-testing--verification)**
 
 ---
 
@@ -23,11 +23,22 @@ A compact sessions marketplace where users authenticate, browse sessions, and bo
 **The Solution:** This platform enforces strict PostgreSQL row-level locks (`SELECT FOR UPDATE`) to guarantee capacity invariants regardless of network latency or concurrent requests.
 
 ## ✨ 2. Key Features
-- **GitHub OAuth Authentication:** Secure login flow mapping GitHub identities to local users via JWT tokens.
-- **Session Marketplace:** A modern, responsive catalog to browse available sessions.
+
+### Marketplace
+- **Discoverability:** A modern, responsive catalog to browse available knowledge-sharing sessions.
+- **Session Details:** View capacity, start times, and descriptions before booking.
+
+### Authentication
+- **GitHub OAuth:** Secure, passwordless login flow mapping GitHub identities to local users via JWT tokens.
+
+### Sessions & Access
 - **Role-Based Access Control:** Differentiates `USER` (can book) and `CREATOR` (can host sessions).
-- **Transaction-Safe Booking:** Database-level concurrency safety preventing overbooking.
-- **Booking Integrity Console:** A specialized dashboard visualizing active PostgreSQL row-level locks and transaction events.
+- **Session Management:** Creators can seamlessly create, edit, and delete their own sessions.
+
+### Booking & Reliability
+- **Transaction-Safe Booking:** Database-level concurrency safety prevents overbooking.
+- **Idempotency Protection:** Prevents duplicate bookings from network retries or double clicks.
+- **Booking Integrity Console:** A specialized dashboard visualizing active PostgreSQL row-level locks and transaction events in real time.
 
 ---
 
